@@ -254,7 +254,7 @@ def getRelevantCars(df,save_to_csv=True):
             "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
         # start a driver
         driver = webdriver.Chrome(ChromeDriverManager().install(),chrome_options=chrome_options)
-        wait = WebDriverWait(driver, 20)
+        wait = WebDriverWait(driver, 30)
         action = ActionChains(driver)
         driver.get(row['car_ad_link'])
 
@@ -267,7 +267,7 @@ def getRelevantCars(df,save_to_csv=True):
         reg = ad_link_soup.findAll('div', {'id': 'firstRegistration-v'})[0].text.replace('\xa0',' ')
         price = ad_link_soup.findAll('span', {'data-testid': 'prime-price'})[0].text.replace('\xa0',' ')
         zipcode = ad_link_soup.findAll('p', {'id': 'db-address'})[0].text.replace('\xa0',' ')
-        title = ad_link_soup.findAll('span',{'id':'sticky-ad-title'})[0].text.replace('\xa0',' ')
+        title = ad_link_soup.findAll('div',{'class':'title'})[0].text.replace('\xa0',' ')
 
         mileages.append(mil)
         powers.append(pow)
